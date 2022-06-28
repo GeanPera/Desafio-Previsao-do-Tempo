@@ -5,6 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Previsão do Tempo</title>
+        <style>
+            output{
+                display: block;
+                width: 250px;
+            }
+            .clCityWeekdayDescription{
+                width: 30%;
+                align-content: right;
+            }
+            #idDivHoje{
+                border: 1px solid rgb(46, 46, 46);
+                width: 400px;
+                
+            }
+            #idTemp{
+                font-size: 50px;
+            }
+           
+        
+        
+        </style>
     </head>
     <body>
         <div id="idDivForm">
@@ -13,27 +34,33 @@
                 <input type="button" id="idBtEnviar" value="Enviar">
             </form>
         </div>
-        <div id="idDivCidade">
-            <output id="idCidade"></output>
-        </div>
-        <div id="idDivTemp">
-            <output id="idTemp"></output>
-        </div>
-        <div id="idDivTemp">
+        <div id="idDivHoje">
+            <div>
+                <output id="idTemp"></output>
+            </div>
+            <div>
+                <output id="idCidade"></output>
+            </div>
+            <div>
+                <output id="idDiaSemana"></output>
+            </div>
+            <div>
+                
+            </div>
+            <div>
+
+            </div>
+            
+            <output id="idDescricao"></output>          
             <output id="idUmidade"></output>
-        </div>
-        <div id="idDivVento">
             <output id="idVento"></output>
-        </div>
-        <div id="idDivAmanhecer">
             <output id="idAmanhecer"></output>
+            <output id="idAnoitecer"></output> 
         </div>
-        <div id="idDivAnoitecer">
-            <output id="idAnoitecer"></output>        
-        </div>
-        <div id="idDivAnoitecer">
-            <output id="idDescricao"></output>        
-        </div>
+        <div>
+                
+        </div>   
+        
         <script>
             var btEnviar = document.getElementById("idBtEnviar")
             var cidadeEsdado
@@ -58,10 +85,11 @@
             function imprimir() {
                 console.log(previsao)
                 document.getElementById("idCidade").value = previsao.city
+                document.getElementById("idDiaSemana").value = previsao.forecast[0].weekday
                 document.getElementById("idTemp").value = previsao.temp + "°"
                 document.getElementById("idVento").value = previsao.wind_speedy
-                document.getElementById("idAmanhecer").value = previsao.sunrise
-                document.getElementById("idAnoitecer").value = previsao.sunset
+                document.getElementById("idAmanhecer").value = "Amanhecer: " + previsao.sunrise
+                document.getElementById("idAnoitecer").value = "Anoitecer: " + previsao.sunset
                 document.getElementById("idDescricao").value = previsao.description
                 document.getElementById("idUmidade").value = previsao.humidity + "%"
             }
