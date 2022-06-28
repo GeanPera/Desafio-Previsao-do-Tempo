@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Previsão do Tempo</title>
-</head>
-<body>
-    <script>
-        var previsao
-        AJAX()
-        inicializacao()
-        async function inicializacao() {
-            previsao = await pegarPrevisao()
-            
-            imprimir()
-        }
-        function AJAX() {
-            var xhr = new XMLHttpRequest(); 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Previsão do Tempo</title>
+    </head>
+    <body>
+        <div id="idDivForm">
+            <form action="">
+                <input type="text" name="nmCidadeEstado" id="idCidadeEstado" placeholder=" Ex: SãoPaulo,SP">
+                <input type="button" id="idBtEnviar" value="Enviar">
+            </form>
+        </div>
+        <script>
+            var btEnviar = document.getElementById("idBtEnviar")
+            var cidadeEsdado
+            var previsao
 
-                xhr.open("GET", "https://api.hgbrasil.com/weather")
-
-                xhr.addEventListener("load", function(){
-                    var resposta = xhr.responseText;
-                    
-                    console.log(resposta)
-                })
+            btEnviar.onclick = function () {
+                cidadeEsdado = document.getElementById("idCidadeEstado").value
+                inicializacao()
+            }
+          
+            async function inicializacao() {
+                previsao = await pegarPrevisao()
                 
-                xhr.send()
-        }
-        async function pegarPrevisao() {
+                imprimir()
+            }
+            async function pegarPrevisao() {
 
-            let previsaoObj = await fetch("https://api.hgbrasil.com/weather?woeid=459654")
-            return previsaoObj
+                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&key=9262857f&city_name=" + cidadeEsdado)
+                return previsaoObj.json()
 
-        }    
-        function imprimir() {
-            console.log(previsao)
-            
-        }
-    </script>
-</body>
+            }    
+            function imprimir() {
+                console.log(previsao)
+                
+            }
+        </script>
+    </body>
 </html>
