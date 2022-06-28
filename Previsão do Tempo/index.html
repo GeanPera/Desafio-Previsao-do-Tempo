@@ -13,6 +13,27 @@
                 <input type="button" id="idBtEnviar" value="Enviar">
             </form>
         </div>
+        <div id="idDivCidade">
+            <output id="idCidade"></output>
+        </div>
+        <div id="idDivTemp">
+            <output id="idTemp"></output>
+        </div>
+        <div id="idDivTemp">
+            <output id="idUmidade"></output>
+        </div>
+        <div id="idDivVento">
+            <output id="idVento"></output>
+        </div>
+        <div id="idDivAmanhecer">
+            <output id="idAmanhecer"></output>
+        </div>
+        <div id="idDivAnoitecer">
+            <output id="idAnoitecer"></output>        
+        </div>
+        <div id="idDivAnoitecer">
+            <output id="idDescricao"></output>        
+        </div>
         <script>
             var btEnviar = document.getElementById("idBtEnviar")
             var cidadeEsdado
@@ -30,13 +51,19 @@
             }
             async function pegarPrevisao() {
 
-                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&key=9262857f&city_name=" + cidadeEsdado)
+                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&array_limit=7&fields=only_results,temp,city,forecast,max,min,date,description,weekday,humidity,wind_speedy,sunrise,sunset&key=9262857f&city_name=" + cidadeEsdado)
                 return previsaoObj.json()
 
             }    
             function imprimir() {
                 console.log(previsao)
-                
+                document.getElementById("idCidade").value = previsao.city
+                document.getElementById("idTemp").value = previsao.temp + "°"
+                document.getElementById("idVento").value = previsao.wind_speedy
+                document.getElementById("idAmanhecer").value = previsao.sunrise
+                document.getElementById("idAnoitecer").value = previsao.sunset
+                document.getElementById("idDescricao").value = previsao.description
+                document.getElementById("idUmidade").value = previsao.humidity + "%"
             }
         </script>
     </body>
