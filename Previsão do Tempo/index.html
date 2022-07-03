@@ -18,6 +18,13 @@
             section{
                 border: 1px black solid;
             }
+            input{
+                margin-bottom: 15px;
+            }
+            #idTitulo{
+                text-align: center;
+                color: white;
+            }
             #idDiaPrincipal{
                 width: 390px;
                 margin: auto;
@@ -34,6 +41,7 @@
                 width: 180px;
                 margin-top: 20px;
                 margin-bottom: 20px;
+                color: white;
             }
             #idDivHoje{
                 width: 370px;
@@ -53,6 +61,7 @@
                 padding: 10px;
                 column-gap: 20px;
                 text-align: center;
+                color: white;
             }
             #idDivTempHoje{
                 grid-column: 2;
@@ -139,21 +148,26 @@
                 height: 64px;
                 width: 64px;
             }
+            
 
         </style>
     </head>
     <body>
+        <div id="idTitulo">
+            <h1>Previsão do Tempo</h1>
+        </div>
         <div id="idDivForm">
             <form action="">
                 <div>
-                    <input type="text" name="nmCidadeEstado" id="idCidadeEstado" placeholder=" Sua cidade....">
+                    <label for="idCidadeEstado">Qual sua cidade?</label>
+                    <input type="text" name="nmCidade" id="idCidadeEstado" placeholder=" Sua cidade....">
                 </div>
                 <div>
                     <input type="button" id="idBtEnviar" value="Enviar">
                 </div>
             </form>
         </div>
-        <section id="idDiaPrincipal">
+        <section id="idDiaPrincipal" hidden>
             <!-- Section dos dados do dia da pesquisa -->
             <div id="idDivHoje">
                 <div id="idDivCityDay">
@@ -199,10 +213,11 @@
                 </div>
             </div>
         </section>
-        <section id="idOutrosDias">
+        <section id="idOutrosDias" hidden>
             <!-- Section dos dados do dia da pesquisa -->
             <div id="idDivOutrosDias">
                 <div >
+                    
                     <output id="idOutDiaCol1"></output>
                     <div id="idImagemCol1"></div>
                     <div>
@@ -255,22 +270,25 @@
         
         <script>
             var btEnviar = document.getElementById("idBtEnviar")
-            var cidadeEsdado
+            var cidade
             var previsao
 
             btEnviar.onclick = function () {
-                cidadeEsdado = document.getElementById("idCidadeEstado").value
+                cidade = document.getElementById("idCidadeEstado").value
                 inicializacao()
             }
           
             async function inicializacao() {
                 previsao = await pegarPrevisao()
+                document.getElementById("idDiaPrincipal").hidden = false
+                document.getElementById("idOutrosDias").hidden = false
+                document.getElementById("idCidadeEstado").value = ""
                 definirImagem()
                 imprimir()
             }
             async function pegarPrevisao() {
 
-                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&fields=only_results,temp,city,forecast,max,min,date,description,weekday,humidity,wind_speedy,sunrise,sunset&key=51fd71ee&city_name=" + cidadeEsdado)
+                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&fields=only_results,temp,city,forecast,max,min,date,description,weekday,humidity,wind_speedy,sunrise,sunset&key=51fd71ee&city_name=" + cidade)
                 return previsaoObj.json()
 
             }    
