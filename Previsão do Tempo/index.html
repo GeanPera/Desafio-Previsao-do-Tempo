@@ -159,9 +159,11 @@
             <form action="">
                 <div>
                     <label for="idCidadeEstado">Qual sua cidade?</label>
+                    <!-- Campo para informar a cidade -->
                     <input type="text" name="nmCidade" id="idCidadeEstado" placeholder=" Sua cidade....">
                 </div>
                 <div>
+                    <!-- Botão para enviar a cidade -->
                     <input type="button" id="idBtEnviar" value="Enviar">
                 </div>
             </form>
@@ -177,15 +179,19 @@
                         - Vento
                     -->
                     <div id="idDivCidade">
+                        <!-- Cidade -->
                         <output id="idCidade"></output>
                     </div>
                     <div id="idDivDiaSemana">
+                        <!-- Dia da semana e dia no mês -->
                         <output id="idDiaHoje"></output>
                     </div>
                     <div id="idDivUmidade">
+                        <!-- Umidade -->
                         <output id="idUmidade"></output>
                     </div>
                     <div id="idDivVento">
+                        <!-- Vento -->
                         <output id="idVento"></output>
                     </div>
                 </div>
@@ -198,14 +204,19 @@
                         - Imagem de acordo com desrição
                     -->
                     <div id="idTempsHoje">
+                        <!-- Temperatura atual -->
                         <output id="idTemp"></output>
+                        <!-- Temperatura max do dia -->
                         <output id="idMaxTempHoje"></output>
+                        <!-- Temperatura min do dia -->
                         <output id="idMinTempHoje"></output> 
                     </div>
                     <div id="idDivDescricaoHoje">
+                        <!-- Campo onde vai a imagem da descrição do dia -->
                         <div id="idDescricaoImagem">
                         </div>
                         <div>
+                            <!-- Campo onde vai a descrição do dia -->
                             <output id="idDescricao"></output> 
                         </div>  
                     </div>
@@ -216,68 +227,104 @@
             <!-- Section dos dados do dia da pesquisa -->
             <div id="idDivOutrosDias">
                 <div >
-                    
+                    <!-- Dia da semana -->
                     <output id="idOutDiaCol1"></output>
+                    <!-- Imagem da descrição do dia -->
                     <div id="idImagemCol1"></div>
                     <div>
+                        <!-- Descrição do dia -->
                         <output id="idDescricaoCol1"></output>
                     </div>
+                    <!-- Temp max e min do dia -->
                     <output id="idOutTempCol1"></output>
                 </div>
+
                 <div >
+                    <!-- Dia da semana -->
                     <output id="idOutDiaCol2"></output>
+                    <!-- Imagem da descrição do dia -->
                     <div id="idImagemCol2"></div>
                     <div>
-                        <output id="idDescricaoCol2"></output>                        
+                        <!-- Descrição do dia -->
+                        <output id="idDescricaoCol2"></output>
                     </div>
+                    <!-- Temp max e min do dia -->
                     <output id="idOutTempCol2"></output>
                 </div>
+
                 <div >
+                    <!-- Dia da semana -->
                     <output id="idOutDiaCol3"></output>
+                    <!-- Imagem da descrição do dia -->
                     <div id="idImagemCol3"></div>
                     <div>
+                        <!-- Descrição do dia -->
                         <output id="idDescricaoCol3"></output>
                     </div>
+                    <!-- Temp max e min do dia -->
                     <output id="idOutTempCol3"></output>
                 </div>
+
                 <div >
+                    <!-- Dia da semana -->
                     <output id="idOutDiaCol4"></output>
+                    <!-- Imagem da descrição do dia -->
                     <div id="idImagemCol4"></div>
                     <div>
+                        <!-- Descrição do dia -->
                         <output id="idDescricaoCol4"></output>
                     </div>
+                    <!-- Temp max e min do dia -->
                     <output id="idOutTempCol4"></output>
                 </div>
+
                 <div >
+                    <!-- Dia da semana -->
                     <output id="idOutDiaCol5"></output>
+                    <!-- Imagem da descrição do dia -->
                     <div id="idImagemCol5"></div>
                     <div>
+                        <!-- Descrição do dia -->
                         <output id="idDescricaoCol5"></output>
                     </div>
+                    <!-- Temp max e min do dia -->
                     <output id="idOutTempCol5"></output>
                 </div>
+
                 <div >
+                    <!-- Dia da semana -->
                     <output id="idOutDiaCol6"></output>
+                    <!-- Imagem da descrição do dia -->
                     <div id="idImagemCol6"></div>
                     <div>
+                        <!-- Descrição do dia -->
                         <output id="idDescricaoCol6"></output>
                     </div>
+                    <!-- Temp max e min do dia -->
                     <output id="idOutTempCol6"></output>
                 </div>
             </div>
         </section>
         
         <script>
+            // Variaveis iniciais
             var btEnviar = document.getElementById("idBtEnviar")
             var cidade
             var previsao
-
+            // Botão que inicia o processamento
             btEnviar.onclick = function () {
                 cidade = document.getElementById("idCidadeEstado").value
                 inicializacao()
             }
           
             async function inicializacao() {
+                /* Function 
+                    - Manda pegar a Previsão
+                    - Tira o hidden das section
+                    - Limpa o campo da cidade
+                    - Manda definir as imagem
+                    - Imprimi na tela
+                */
                 previsao = await pegarPrevisao()
                 document.getElementById("idDiaPrincipal").hidden = false
                 document.getElementById("idOutrosDias").hidden = false
@@ -286,7 +333,7 @@
                 imprimir()
             }
             async function pegarPrevisao() {
-
+                // Manda pegar a previsão da semana pela API
                 let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&fields=only_results,temp,city,forecast,max,min,date,description,weekday,humidity,wind_speedy,sunrise,sunset&key=51fd71ee&city_name=" + cidade)
                 return previsaoObj.json()
 
