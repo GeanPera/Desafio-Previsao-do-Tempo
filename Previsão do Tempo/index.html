@@ -6,24 +6,53 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Previsão do Tempo</title>
         <style>
-            #idDivForm{
-                margin: 25px;
-            }
             h1{
                 margin: 0px;
             }
-            div{
-                margin-bottom: 5px;
+            form{
+                text-align: center;
+            }
+            body{
+                background-color: rgb(85, 85, 85);
+            }
+            section{
+                border: 1px black solid;
+            }
+            #idDiaPrincipal{
+                width: 390px;
+                margin: auto;
+                background-color: rgb(126, 126, 126);
+                margin-bottom: 20px;
+            }
+            #idOutrosDias{
+                width: 640px;
+                margin: auto;
+                background-color: rgb(126, 126, 126);
+            }
+            #idDivForm{
+                margin: auto;
+                width: 180px;
+                margin-top: 20px;
+                margin-bottom: 20px;
             }
             #idDivHoje{
-                border: 1px solid rgb(46, 46, 46);
-                border-radius: 10px;
                 width: 370px;
                 display: grid;
                 grid-template-columns: 180px 180px ;
                 grid-template-rows: auto;
                 padding: 10px;
                 column-gap: 10px;
+                background-color: #48484842;
+                color: white;
+            }
+            #idDivOutrosDias{
+                width: 620px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+                grid-template-rows: auto;
+                padding: 10px;
+                column-gap: 20px;
+                text-align: center;
             }
             #idDivTempHoje{
                 grid-column: 2;
@@ -44,8 +73,34 @@
             #idTemp{
                 font-size: 50px;
             } 
+            #idDivDescricaoHoje{
+                margin: auto;
+            }
+            #idTempsHoje{
+                margin: auto;
+            }
+            .clfundoNublado{
+                background-image: url("img/fundoNublado.jpg");
+                background-repeat: no-repeat;
+                background-size: 392px auto;
+            }
+            .clfundoTempoLimpo{
+                background-image: url("img/fundoTempoLimpo.jpg");
+                background-repeat: no-repeat;
+                background-size: 392px auto;
+            }
+            .clfundoParcialmenteNublado{
+                background-image: url("img/fundoParcialmenteNublado.jpg");
+                background-repeat: no-repeat;
+                background-size: 392px auto;
+            }
+            .clfundoChuva{
+                background-image: url("img/fundoChuva.jpg");
+                background-repeat: no-repeat;
+                background-size: 392px auto;
+            }
             .clNublado{    
-                background-image: url("img/cloudy.png");
+                background-image: url("img/nublado.png");
                 background-repeat: no-repeat;
                 background-size: 64px 64px;
                 margin: auto;
@@ -53,7 +108,7 @@
                 width: 64px;
             }
             .clTempoLimpo{
-                background-image: url("img/sunny.png");
+                background-image: url("img/tempoLimpo.png");
                 background-repeat: no-repeat;
                 background-size: 64px 64px;
                 margin: auto;
@@ -61,43 +116,44 @@
                 width: 64px;
             }
             .clParcialmenteNublado{
-                background-image: url("img/partly_cloudy.png");
+                background-image: url("img/parcialmenteNublado.png");
                 background-repeat: no-repeat;
                 background-size: 64px 64px;
                 margin: auto;
                 height: 64px;
                 width: 64px;
             }
-            .clChuvendo{
-                background-image: url("img/rain.png");
+            .clChuvaEsparsas{
+                background-image: url("img/chuvasEspasas.png");
                 background-repeat: no-repeat;
                 background-size: 64px 64px;
                 margin: auto;
                 height: 64px;
                 width: 64px;
             }
-            #idDivDescricaoHoje{
+            .clChuva{
+                background-image: url("img/chuva.png");
+                background-repeat: no-repeat;
+                background-size: 64px 64px;
                 margin: auto;
+                height: 64px;
+                width: 64px;
             }
-            #idTempsHoje{
-                margin: auto;
-            }
-           
-            
 
-           
-        
-        
         </style>
     </head>
     <body>
         <div id="idDivForm">
             <form action="">
-                <input type="text" name="nmCidadeEstado" id="idCidadeEstado" placeholder=" Sua cidade....">
-                <input type="button" id="idBtEnviar" value="Enviar">
+                <div>
+                    <input type="text" name="nmCidadeEstado" id="idCidadeEstado" placeholder=" Sua cidade....">
+                </div>
+                <div>
+                    <input type="button" id="idBtEnviar" value="Enviar">
+                </div>
             </form>
         </div>
-        <section>
+        <section id="idDiaPrincipal">
             <!-- Section dos dados do dia da pesquisa -->
             <div id="idDivHoje">
                 <div id="idDivCityDay">
@@ -143,6 +199,59 @@
                 </div>
             </div>
         </section>
+        <section id="idOutrosDias">
+            <!-- Section dos dados do dia da pesquisa -->
+            <div id="idDivOutrosDias">
+                <div >
+                    <output id="idOutDiaCol1"></output>
+                    <div id="idImagemCol1"></div>
+                    <div>
+                        <output id="idDescricaoCol1"></output>
+                    </div>
+                    <output id="idOutTempCol1"></output>
+                </div>
+                <div >
+                    <output id="idOutDiaCol2"></output>
+                    <div id="idImagemCol2"></div>
+                    <div>
+                        <output id="idDescricaoCol2"></output>                        
+                    </div>
+                    <output id="idOutTempCol2"></output>
+                </div>
+                <div >
+                    <output id="idOutDiaCol3"></output>
+                    <div id="idImagemCol3"></div>
+                    <div>
+                        <output id="idDescricaoCol3"></output>
+                    </div>
+                    <output id="idOutTempCol3"></output>
+                </div>
+                <div >
+                    <output id="idOutDiaCol4"></output>
+                    <div id="idImagemCol4"></div>
+                    <div>
+                        <output id="idDescricaoCol4"></output>
+                    </div>
+                    <output id="idOutTempCol4"></output>
+                </div>
+                <div >
+                    <output id="idOutDiaCol5"></output>
+                    <div id="idImagemCol5"></div>
+                    <div>
+                        <output id="idDescricaoCol5"></output>
+                    </div>
+                    <output id="idOutTempCol5"></output>
+                </div>
+                <div >
+                    <output id="idOutDiaCol6"></output>
+                    <div id="idImagemCol6"></div>
+                    <div>
+                        <output id="idDescricaoCol6"></output>
+                    </div>
+                    <output id="idOutTempCol6"></output>
+                </div>
+            </div>
+        </section>
         
         <script>
             var btEnviar = document.getElementById("idBtEnviar")
@@ -161,31 +270,203 @@
             }
             async function pegarPrevisao() {
 
-                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&fields=only_results,temp,city,forecast,max,min,date,description,weekday,humidity,wind_speedy,sunrise,sunset&key=e206d6ca&city_name=" + cidadeEsdado)
+                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&fields=only_results,temp,city,forecast,max,min,date,description,weekday,humidity,wind_speedy,sunrise,sunset&key=51fd71ee&city_name=" + cidadeEsdado)
                 return previsaoObj.json()
 
             }    
 
             function definirImagem() {
-                const descricao = previsao.description
-                const classe = document.createAttribute("class");
-                if (descricao == "Tempo nublado") {
-                    classe.value = "clNublado";
+                // Função para definir as imagem da descrição do dia
+               
+                // Definir imagem do dia atual
+                // Criar o atributo "class"
+                const classeHoje = document.createAttribute("class");
+                // Definir a classe de acordo com a descricão do dia
+                if (previsao.description == "Tempo nublado") {
+                    classeHoje.value = "clNublado";
                 }
-                if (descricao == "Tempo limpo") {
-                    classe.value = "clTempoLimpo";
+                if (previsao.description == "Tempo limpo") {
+                    classeHoje.value = "clTempoLimpo";
                 }
-                if (descricao == "Parcialmente nublado") {
-                    classe.value = "clParcialmenteNublado";
+                if (previsao.description == "Parcialmente nublado") {
+                    classeHoje.value = "clParcialmenteNublado";
                 }
-                if (descricao == "Chuvas esparsas") {
-                    classe.value = "clChuvendo";
+                if (previsao.description == "Chuvas esparsas") {
+                    classeHoje.value = "clChuvaEsparsas";
                 }
-                document.getElementById("idDescricaoImagem").setAttributeNode(classe);
+                if (previsao.description == "Chuva") {
+                    classeHoje.value = "clChuva";
+                }
+                // Aplica na div especifica de cada dia
+                document.getElementById("idDescricaoImagem").setAttributeNode(classeHoje);
+
+                // Definir imagem do fundo
+                // Criar o atributo "class"
+                const classeFundo = document.createAttribute("class");
+                // Definir a classe de acordo com a descricão do dia
+                if (previsao.description == "Tempo nublado") {
+                    classeFundo.value = "clfundoNublado";
+                }
+                if (previsao.description == "Tempo limpo") {
+                    classeFundo.value = "clfundoTempoLimpo";
+                }
+                if (previsao.description == "Parcialmente nublado") {
+                    classeFundo.value = "clfundoParcialmenteNublado";
+                }
+                if (previsao.description == "Chuvas esparsas") {
+                    classeFundo.value = "clfundoChuva";
+                }
+                if (previsao.description == "Chuva") {
+                    classeFundo.value = "clfundoChuva";
+                }
+                // Aplica fundo na section
+                document.getElementById("idDiaPrincipal").setAttributeNode(classeFundo);
+
+                // Definir imagem de 1 dia após o dia em que foi pesquisado
+                // Criar o atributo "class"
+                const classeCol1 = document.createAttribute("class");
+                // Definir a classe de acordo com a descricão do dia
+                if (previsao.forecast[1].description == "Tempo nublado") {
+                    classeCol1.value = "clNublado";
+                }
+                if (previsao.forecast[1].description == "Tempo limpo") {
+                    classeCol1.value = "clTempoLimpo";
+                }
+                if (previsao.forecast[1].description == "Parcialmente nublado") {
+                    classeCol1.value = "clParcialmenteNublado";
+                }
+                if (previsao.forecast[1].description == "Chuvas esparsas") {
+                    classeCol1.value = "clChuvaEsparsas";
+                }
+                if (previsao.forecast[1].description == "Chuva") {
+                    classeCol1.value = "clChuva";
+                }
+                // Aplica na div especifica de cada dia
+                document.getElementById("idImagemCol1").setAttributeNode(classeCol1);
+
+                // Definir imagem de 2 dia após o dia em que foi pesquisado
+                // Criar o atributo "class"
+                const classeCol2 = document.createAttribute("class");
+                // Definir a classe de acordo com a descricão do dia
+                if (previsao.forecast[2].description == "Tempo nublado") {
+                    classeCol2.value = "clNublado";
+                }
+                if (previsao.forecast[2].description == "Tempo limpo") {
+                    classeCol2.value = "clTempoLimpo";
+                }
+                if (previsao.forecast[2].description == "Parcialmente nublado") {
+                    classeCol2.value = "clParcialmenteNublado";
+                }
+                if (previsao.forecast[2].description == "Chuvas esparsas") {
+                    classeCol2.value = "clChuvaEsparsas";
+                }
+                if (previsao.forecast[2].description == "Chuva") {
+                    classeCol2.value = "clChuva";
+                }
+                // Aplica na div especifica de cada dia
+                document.getElementById("idImagemCol2").setAttributeNode(classeCol2);
+
+                // Definir imagem de 3 dia após o dia em que foi pesquisado
+                // Criar o atributo "class"
+                const classeCol3 = document.createAttribute("class");
+                // Definir a classe de acordo com a descricão do dia
+                if (previsao.forecast[3].description == "Tempo nublado") {
+                    classeCol3.value = "clNublado";
+                }
+                if (previsao.forecast[3].description == "Tempo limpo") {
+                    classeCol3.value = "clTempoLimpo";
+                }
+                if (previsao.forecast[3].description == "Parcialmente nublado") {
+                    classeCol3.value = "clParcialmenteNublado";
+                }
+                if (previsao.forecast[3].description == "Chuvas esparsas") {
+                    classeCol3.value = "clChuvaEsparsas";
+                }
+                if (previsao.forecast[3].description == "Chuva") {
+                    classeCol3.value = "clChuva";
+                }
+                // Aplica na div especifica de cada dia
+                document.getElementById("idImagemCol3").setAttributeNode(classeCol3);
+
+                // Definir imagem de 4 dia após o dia em que foi pesquisado
+                // Criar o atributo "class"
+                const classeCol4 = document.createAttribute("class");
+                // Definir a classe de acordo com a descricão do dia
+                if (previsao.forecast[4].description == "Tempo nublado") {
+                    classeCol4.value = "clNublado";
+                }
+                if (previsao.forecast[4].description == "Tempo limpo") {
+                    classeCol4.value = "clTempoLimpo";
+                }
+                if (previsao.forecast[4].description == "Parcialmente nublado") {
+                    classeCol4.value = "clParcialmenteNublado";
+                }
+                if (previsao.forecast[4].description == "Chuvas esparsas") {
+                    classeCol4.value = "clChuvaEsparsas";
+                }
+                if (previsao.forecast[4].description == "Chuva") {
+                    classeCol4.value = "clChuva";
+                }
+                // Aplica na div especifica de cada dia
+                document.getElementById("idImagemCol4").setAttributeNode(classeCol4);
+                
+                // Definir imagem de 5 dia após o dia em que foi pesquisado
+                // Criar o atributo "class"
+                const classeCol5 = document.createAttribute("class");
+                // Definir a classe de acordo com a descricão do dia
+                if (previsao.forecast[5].description == "Tempo nublado") {
+                    classeCol5.value = "clNublado";
+                }
+                if (previsao.forecast[5].description == "Tempo limpo") {
+                    classeCol5.value = "clTempoLimpo";
+                }
+                if (previsao.forecast[5].description == "Parcialmente nublado") {
+                    classeCol5.value = "clParcialmenteNublado";
+                }
+                if (previsao.forecast[5].description == "Chuvas esparsas") {
+                    classeCol5.value = "clChuvaEsparsas";
+                }
+                if (previsao.forecast[5].description == "Chuva") {
+                    classeCol5.value = "clChuva";
+                }
+                // Aplica na div especifica de cada dia
+                document.getElementById("idImagemCol5").setAttributeNode(classeCol5);
+
+                // Definir imagem de 6 dia após o dia em que foi pesquisado
+                // Criar o atributo "class"
+                const classeCol6 = document.createAttribute("class");
+                // Definir a classe de acordo com a descricão do dia
+                if (previsao.forecast[6].description == "Tempo nublado") {
+                    classeCol6.value = "clNublado";
+                }
+                if (previsao.forecast[6].description == "Tempo limpo") {
+                    classeCol6.value = "clTempoLimpo";
+                }
+                if (previsao.forecast[6].description == "Parcialmente nublado") {
+                    classeCol6.value = "clParcialmenteNublado";
+                }
+                if (previsao.forecast[6].description == "Chuvas esparsas") {
+                    classeCol6.value = "clChuvaEsparsas";
+                }
+                if (previsao.forecast[6].description == "Chuva") {
+                    classeCol6.value = "clChuva";
+                }
+                // Aplica na div especifica de cada dia
+                document.getElementById("idImagemCol6").setAttributeNode(classeCol6);
             }
 
             function imprimir() {
                 console.log(previsao)
+                /* Imprimir os dados do dia atual 
+                    - Cidade
+                    - Dia
+                    - Temperatura
+                    - Vento
+                    - Temperatura max
+                    - Temperatura min
+                    - Descrição do dia
+                    - Umidade
+                */
                 document.getElementById("idCidade").value = previsao.city
                 document.getElementById("idDiaHoje").value = previsao.forecast[0].weekday + ", " + previsao.date
                 document.getElementById("idTemp").value = previsao.temp + "°"
@@ -194,6 +475,30 @@
                 document.getElementById("idMinTempHoje").value = "Min: " + previsao.forecast[0].min + "°"
                 document.getElementById("idDescricao").value = previsao.description
                 document.getElementById("idUmidade").value = "Umidade: " + previsao.humidity + "%"
+
+                // Imprimir os dias dos outros dias
+                document.getElementById("idOutDiaCol1").value = previsao.forecast[1].weekday 
+                document.getElementById("idOutDiaCol2").value = previsao.forecast[2].weekday 
+                document.getElementById("idOutDiaCol3").value = previsao.forecast[3].weekday 
+                document.getElementById("idOutDiaCol4").value = previsao.forecast[4].weekday 
+                document.getElementById("idOutDiaCol5").value = previsao.forecast[5].weekday 
+                document.getElementById("idOutDiaCol6").value = previsao.forecast[6].weekday 
+                
+                // Imprimir a descrição dos outros dias
+                document.getElementById("idDescricaoCol1").value = previsao.forecast[1].description 
+                document.getElementById("idDescricaoCol2").value = previsao.forecast[2].description 
+                document.getElementById("idDescricaoCol3").value = previsao.forecast[3].description 
+                document.getElementById("idDescricaoCol4").value = previsao.forecast[4].description 
+                document.getElementById("idDescricaoCol5").value = previsao.forecast[5].description 
+                document.getElementById("idDescricaoCol6").value = previsao.forecast[6].description
+
+                // Imprimir a temperatura maxima e minima de cada dia
+                document.getElementById("idOutTempCol1").value = previsao.forecast[1].max + "° - " + previsao.forecast[1].min + "°"
+                document.getElementById("idOutTempCol2").value = previsao.forecast[2].max + "° - " + previsao.forecast[2].min + "°"
+                document.getElementById("idOutTempCol3").value = previsao.forecast[3].max + "° - " + previsao.forecast[3].min + "°"
+                document.getElementById("idOutTempCol4").value = previsao.forecast[4].max + "° - " + previsao.forecast[4].min + "°"
+                document.getElementById("idOutTempCol5").value = previsao.forecast[5].max + "° - " + previsao.forecast[5].min + "°"
+                document.getElementById("idOutTempCol6").value = previsao.forecast[6].max + "° - " + previsao.forecast[6].min + "°"
             }
         </script>
     </body>
