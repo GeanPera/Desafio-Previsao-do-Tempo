@@ -6,22 +6,85 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Previsão do Tempo</title>
         <style>
-            output{
-                display: block;
-                width: 250px;
+            #idDivForm{
+                margin: 25px;
             }
-            .clCityWeekdayDescription{
-                width: 30%;
-                align-content: right;
+            h1{
+                margin: 0px;
+            }
+            div{
+                margin-bottom: 5px;
             }
             #idDivHoje{
                 border: 1px solid rgb(46, 46, 46);
-                width: 400px;
-                
+                border-radius: 10px;
+                width: 370px;
+                display: grid;
+                grid-template-columns: 180px 180px ;
+                grid-template-rows: auto;
+                padding: 10px;
+                column-gap: 10px;
+            }
+            #idDivTempHoje{
+                grid-column: 2;
+                grid-row: 1;
+                display: grid;
+                grid-template-columns: 70px 100px;
+                column-gap: 10px;
+                width: 180px;
+            }
+            #idDivCityDay{
+                grid-column: 1;
+                grid-row: 1;
+                width: 180px; 
+            }
+            #idCidade{
+                font-size: 30px;
             }
             #idTemp{
                 font-size: 50px;
+            } 
+            .clNublado{    
+                background-image: url("img/cloudy.png");
+                background-repeat: no-repeat;
+                background-size: 64px 64px;
+                margin: auto;
+                height: 64px;
+                width: 64px;
             }
+            .clTempoLimpo{
+                background-image: url("img/sunny.png");
+                background-repeat: no-repeat;
+                background-size: 64px 64px;
+                margin: auto;
+                height: 64px;
+                width: 64px;
+            }
+            .clParcialmenteNublado{
+                background-image: url("img/partly_cloudy.png");
+                background-repeat: no-repeat;
+                background-size: 64px 64px;
+                margin: auto;
+                height: 64px;
+                width: 64px;
+            }
+            .clChuvendo{
+                background-image: url("img/rain.png");
+                background-repeat: no-repeat;
+                background-size: 64px 64px;
+                margin: auto;
+                height: 64px;
+                width: 64px;
+            }
+            #idDivDescricaoHoje{
+                margin: auto;
+            }
+            #idTempsHoje{
+                margin: auto;
+            }
+           
+            
+
            
         
         
@@ -30,36 +93,56 @@
     <body>
         <div id="idDivForm">
             <form action="">
-                <input type="text" name="nmCidadeEstado" id="idCidadeEstado" placeholder=" Ex: SãoPaulo,SP">
+                <input type="text" name="nmCidadeEstado" id="idCidadeEstado" placeholder=" Sua cidade....">
                 <input type="button" id="idBtEnviar" value="Enviar">
             </form>
         </div>
-        <div id="idDivHoje">
-            <div>
-                <output id="idTemp"></output>
+        <section>
+            <!-- Section dos dados do dia da pesquisa -->
+            <div id="idDivHoje">
+                <div id="idDivCityDay">
+                    <!-- Coluna 1
+                        - Nome da cidade
+                        - Dia da semana e data
+                        - Umidade
+                        - Vento
+                    -->
+                    <div id="idDivCidade">
+                        <output id="idCidade"></output>
+                    </div>
+                    <div id="idDivDiaSemana">
+                        <output id="idDiaHoje"></output>
+                    </div>
+                    <div id="idDivUmidade">
+                        <output id="idUmidade"></output>
+                    </div>
+                    <div id="idDivVento">
+                        <output id="idVento"></output>
+                    </div>
+                </div>
+                <div id="idDivTempHoje">
+                    <!-- Coluna 2
+                        - Temperatura atual
+                        - Temperatura minima
+                        - Temperatura maxima
+                        - Descrição do dia
+                        - Imagem de acordo com desrição
+                    -->
+                    <div id="idTempsHoje">
+                        <output id="idTemp"></output>
+                        <output id="idMaxTempHoje"></output>
+                        <output id="idMinTempHoje"></output> 
+                    </div>
+                    <div id="idDivDescricaoHoje">
+                        <div id="idDescricaoImagem">
+                        </div>
+                        <div>
+                            <output id="idDescricao"></output> 
+                        </div>  
+                    </div>
+                </div>
             </div>
-            <div>
-                <output id="idCidade"></output>
-            </div>
-            <div>
-                <output id="idDiaSemana"></output>
-            </div>
-            <div>
-                
-            </div>
-            <div>
-
-            </div>
-            
-            <output id="idDescricao"></output>          
-            <output id="idUmidade"></output>
-            <output id="idVento"></output>
-            <output id="idAmanhecer"></output>
-            <output id="idAnoitecer"></output> 
-        </div>
-        <div>
-                
-        </div>   
+        </section>
         
         <script>
             var btEnviar = document.getElementById("idBtEnviar")
@@ -73,25 +156,44 @@
           
             async function inicializacao() {
                 previsao = await pegarPrevisao()
-                
+                definirImagem()
                 imprimir()
             }
             async function pegarPrevisao() {
 
-                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&array_limit=7&fields=only_results,temp,city,forecast,max,min,date,description,weekday,humidity,wind_speedy,sunrise,sunset&key=9262857f&city_name=" + cidadeEsdado)
+                let previsaoObj = await fetch("https://api.hgbrasil.com/weather?format=json-cors&fields=only_results,temp,city,forecast,max,min,date,description,weekday,humidity,wind_speedy,sunrise,sunset&key=e206d6ca&city_name=" + cidadeEsdado)
                 return previsaoObj.json()
 
             }    
+
+            function definirImagem() {
+                const descricao = previsao.description
+                const classe = document.createAttribute("class");
+                if (descricao == "Tempo nublado") {
+                    classe.value = "clNublado";
+                }
+                if (descricao == "Tempo limpo") {
+                    classe.value = "clTempoLimpo";
+                }
+                if (descricao == "Parcialmente nublado") {
+                    classe.value = "clParcialmenteNublado";
+                }
+                if (descricao == "Chuvas esparsas") {
+                    classe.value = "clChuvendo";
+                }
+                document.getElementById("idDescricaoImagem").setAttributeNode(classe);
+            }
+
             function imprimir() {
                 console.log(previsao)
                 document.getElementById("idCidade").value = previsao.city
-                document.getElementById("idDiaSemana").value = previsao.forecast[0].weekday
+                document.getElementById("idDiaHoje").value = previsao.forecast[0].weekday + ", " + previsao.date
                 document.getElementById("idTemp").value = previsao.temp + "°"
-                document.getElementById("idVento").value = previsao.wind_speedy
-                document.getElementById("idAmanhecer").value = "Amanhecer: " + previsao.sunrise
-                document.getElementById("idAnoitecer").value = "Anoitecer: " + previsao.sunset
+                document.getElementById("idVento").value = "Vento: " + previsao.wind_speedy
+                document.getElementById("idMaxTempHoje").value = "Max: " + previsao.forecast[0].max + "°"
+                document.getElementById("idMinTempHoje").value = "Min: " + previsao.forecast[0].min + "°"
                 document.getElementById("idDescricao").value = previsao.description
-                document.getElementById("idUmidade").value = previsao.humidity + "%"
+                document.getElementById("idUmidade").value = "Umidade: " + previsao.humidity + "%"
             }
         </script>
     </body>
